@@ -37,11 +37,11 @@ exports.init = function(){
  			var param = params[0].split(':');
  			table['Number'] = parseInt(param[1],16);
  			param = params[1].split(':');
- 			table['Adress'] = param[1];
- 			param = params[2].split(':');
+ 			table['Adress'] = param[1].replace(' ', '');
+            param = params[2].split(':');
  			table['Type'] = parseInt(param[1]);
  			param = params[3].split(':');
- 			table['Identifier'] = param[1];  // >-- maknuti ' ' ako je ikako moguce
+ 			table['Identifier'] = param[1].replace(' ','').split("'").join('');  // >-- maknuti ' ' ako je ikako moguce
  			// Lokacija: x,y,z
  			param = params[4].split(':');
  			var lokacija = param[1].split('-');

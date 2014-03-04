@@ -9,8 +9,6 @@
     "express": "3.4.4",
     "jade": "*",
     "sqlite3": "*",
-    "socket.io": "*",
-    "carrier" : "*",
-    "serialport" : "*"
+    "socket.io": "*"
   }
 }

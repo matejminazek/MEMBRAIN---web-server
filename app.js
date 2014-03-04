@@ -79,15 +79,10 @@ app.get('/control', control.getMainPage);
 app.get('/control/sensors', control.getSensorsPage);
 
 
-// api za testiranje, neće se koristiti
-app.get('/api/events/last', api.getLastEvents);
-app.get('/api/events', api.getAllEvents);
-app.get('/api/commands', api.getAllCommands);
-
 // api za senzorsku mrežu
 app.get('/api/sensors', api.getAllSensors);
 app.get('/api/sensors/measurments',api.getLastSensorData);
-app.get('/api/sensors/measurments/:adress',api.getSensorDataByAdress);
+app.get('/api/sensors/measurments/:identifier',api.getSensorDataByAdress);
 app.get('/api/hubstatus', api.getAllSensorsStatuses);
 
 
@@ -106,7 +101,7 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 db.init();
 TCPsocket.init();
-UART.init();
+//UART.init();
 HTTPsocket.initialize(server);
 
 

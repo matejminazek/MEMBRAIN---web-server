@@ -23,42 +23,6 @@ exports.initialize = function(server){
 
 		// Main control page events
 
-		socket.on('controlPageLoad',function(){
-			db.GetLastEvent(function(eventData){
-				socket.emit('lastEventData', { 'data' : eventData});
-			});
-		});
-		
-		socket.on('led1',function(data){
-			if(data == 'on'){
-				db.AddButtonPressEvent("led1","on");
-				//bb.digitalWrite(ledPin1, bb.HIGH);
-				
-				
-			}else{
-				db.AddButtonPressEvent("led1","off")
-				//bb.digitalWrite(ledPin1, bb.LOW);
-			}
-			db.GetLastEvent(function(eventData){
-				socket.emit('lastEventData', { 'data' : eventData});
-			});
-
-		});
-
-		socket.on('led2',function(data){
-			if(data == 'on'){
-				db.AddButtonPressEvent("led2","on");
-				//bb.digitalWrite(ledPin2, bb.HIGH);
-			}else{
-				db.AddButtonPressEvent("led2","off")
-				//bb.digitalWrite(ledPin2, bb.LOW);
-			}
-			db.GetLastEvent(function(eventData){
-				socket.emit('lastEventData', { 'data' : eventData});
-			});
-		});
-		
-
 		socket.on('TCPrecieve',function(data){
 			console.log("Primljena komanda(TCP)>>>>>>>> " + data);
 
@@ -68,25 +32,10 @@ exports.initialize = function(server){
 				"param" : message[1] 
 			};
 
-
-
-
-			db.AddCommand("client", outputData.command, outputData.param);
 			TCPsocket.send(data);
 		}); 
 
-		socket.on('UARTrecieve',function(data){
-			console.log("Primljena komanda(UART)>>>>>>>> " + data);
-			/*
-			var message = data.split(':');
-			var outputData = {
-				"command" : message[0],
-				"param" : message[1] 
-			};
-			db.AddSensor(outputData.command, outputData.param);
-			*/
-			UART.send(data);
-		});                                                                
+                                                     
 
 		// Sensor control page events
 

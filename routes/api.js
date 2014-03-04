@@ -1,29 +1,6 @@
 
 var db = require('../middleware/database.js');
-
-// Ovo su samo testne rute koje se neće koristiti
-
-exports.getLastEvents = function(req,res){
-	db.GetLastEvent(function(eventData){
-		console.log("API:Saljem podatke (LastEvents)...");
-		res.send(eventData);
-	});
-};
-
-exports.getAllEvents = function(req,res){
-	db.GetAllEvents(function(eventData){
-		console.log("API:Saljem podatke (AllEvents)...");
-		res.send(eventData);
-	});
-};
-
-exports.getAllCommands = function(req,res){
-	db.GetAllCommands(function(commandData){
-		console.log("API:Saljem podatke (Commands)...");
-		res.send(commandData);
-	});
-};
-
+var url = require('url');
 
 // Metode za dohvaćanje podataka sa senzorske mreže
 
@@ -42,9 +19,17 @@ exports.getLastSensorData = function(req,res){
 	});
 }
 
+//1393676291999
+//1393676305009
+//1393676318020
+
 exports.getSensorDataByAdress = function(req,res){
-	var adress = req.params.adress;
-	db.GetSensorDataByAdress(adress,function(data){
+	var identifier = req.params.identifier;
+	var from = req.query.from;
+	var to = req.query.to;
+
+	console.log(from + " " + to);
+	db.GetSensorDataByAdress(identifier,from,to,function(data){
 		res.send(data);
 	});
 }
